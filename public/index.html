@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Order System</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <i class="fas fa-utensils"></i>
+        <h1>FoodFlex</h1>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="order.html">Order</a></li>
+          <li><a href="user.html" id="loginBtn">Login</a></li>
+        </ul>
+      </nav>
+      <div class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="animate-slide-up">Delicious Food Delivered to Your Doorstep</h1>
+        <p class="animate-slide-up delay-1">Order your favorite meals with just a few clicks</p>
+        <div class="cta-buttons animate-slide-up delay-2">
+          <a href="order.html" class="btn btn-primary">Order Now</a>
+          <a href="user.html" class="btn btn-outline">Sign Up</a>
+        </div>
+      </div>
+      <div class="hero-image animate-fade-in">
+        <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Delicious Food">
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">Why Choose Us</h2>
+      <div class="feature-grid">
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">
+            <i class="fas fa-truck-fast"></i>
+          </div>
+          <h3>Fast Delivery</h3>
+          <p>We deliver your order promptly to your door</p>
+        </div>
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">
+            <i class="fas fa-utensils"></i>
+          </div>
+          <h3>Fresh Food</h3>
+          <p>Prepared with quality ingredients</p>
+        </div>
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <h3>24/7 Support</h3>
+          <p>Round the clock customer service</p>
+        </div>
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">
+            <i class="fas fa-wallet"></i>
+          </div>
+          <h3>Easy Payment</h3>
+          <p>Multiple payment methods accepted</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="popular-items">
+    <div class="container">
+      <h2 class="section-title">Popular Items</h2>
+      <div class="menu-preview" id="popularItems">
+        <!-- Items will be loaded dynamically -->
+        <div class="loading-spinner">
+          <i class="fas fa-spinner fa-spin"></i>
+        </div>
+      </div>
+      <div class="view-more">
+        <a href="order.html" class="btn btn-secondary">View Full Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <i class="fas fa-utensils"></i>
+          <h2>FoodFlex</h2>
+          <p>Delicious food delivered to your doorstep</p>
+        </div>
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="order.html">Menu</a></li>
+            <li><a href="user.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h3>Contact Us</h3>
+          <p><i class="fas fa-map-marker-alt"></i> 123 Food Street, Tasty City</p>
+          <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+          <p><i class="fas fa-envelope"></i> info@foodflex.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 FoodFlex. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Firebase Scripts -->
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/menu.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

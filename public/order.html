@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Food - Online Order System</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <i class="fas fa-utensils"></i>
+        <h1>FoodFlex</h1>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="order.html" class="active">Order</a></li>
+          <li><a href="user.html" id="loginBtn">Login</a></li>
+          <li><a href="#" id="cartBtn" class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span>
+          </a></li>
+        </ul>
+      </nav>
+      <div class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <section class="order-hero">
+    <div class="container">
+      <h1>Our Menu</h1>
+      <p>Discover and order our delicious items</p>
+    </div>
+  </section>
+
+  <section class="menu-section">
+    <div class="container">
+      <div class="menu-filters">
+        <div class="search-container">
+          <input type="text" id="searchMenu" placeholder="Search menu items...">
+          <i class="fas fa-search"></i>
+        </div>
+        
+        <div class="category-filters">
+          <button class="filter-btn active" data-category="all">All</button>
+          <button class="filter-btn" data-category="main">Main Dishes</button>
+          <button class="filter-btn" data-category="sides">Sides</button>
+          <button class="filter-btn" data-category="desserts">Desserts</button>
+          <button class="filter-btn" data-category="drinks">Drinks</button>
+        </div>
+        
+        <div class="sort-options">
+          <label for="sortMenu">Sort by:</label>
+          <select id="sortMenu">
+            <option value="name">Name (A-Z)</option>
+            <option value="price-low">Price (Low to High)</option>
+            <option value="price-high">Price (High to Low)</option>
+            <option value="popular">Most Popular</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="menu-grid" id="menuItems">
+        <!-- Menu items will be loaded dynamically -->
+        <div class="loading-spinner">
+          <i class="fas fa-spinner fa-spin"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3><i class="fas fa-shopping-cart"></i> Your Cart</h3>
+      <button id="closeCart" class="close-btn"><i class="fas fa-times"></i></button>
+    </div>
+    
+    <div class="cart-items" id="cartItems">
+      <!-- Cart items will be loaded dynamically -->
+      <div class="empty-cart">
+        <i class="fas fa-shopping-basket"></i>
+        <p>Your cart is empty</p>
+        <p class="empty-cart-message">Add some delicious items to get started!</p>
+      </div>
+    </div>
+    
+    <div class="cart-summary">
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button id="checkoutBtn" class="btn btn-primary btn-block">Proceed to Checkout</button>
+    </div>
+  </div>
+  
+  <div class="overlay" id="overlay"></div>
+  
+  <!-- Checkout Modal -->
+  <div class="modal" id="checkoutModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Complete Your Order</h3>
+        <button class="close-modal"><i class="fas fa-times"></i></button>
+      </div>
+      
+      <div class="modal-body">
+        <div id="loginMessage" class="login-message">
+          <p><i class="fas fa-info-circle"></i> Please <a href="user.html">login</a> to complete your order</p>
+        </div>
+        
+        <form id="checkoutForm" class="checkout-form">
+          <div class="form-section">
+            <h4>Delivery Address</h4>
+            <div class="form-group">
+              <label for="address">Full Address</label>
+              <textarea id="address" required placeholder="Enter your complete address"></textarea>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" required placeholder="City">
+              </div>
+              <div class="form-group">
+                <label for="zipcode">Zip Code</label>
+                <input type="text" id="zipcode" required placeholder="Zip Code">
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <h4>Payment Method</h4>
+            <div class="payment-options">
+              <div class="payment-option">
+                <input type="radio" id="cashOnDelivery" name="paymentMethod" value="cash" checked>
+                <label for="cashOnDelivery">
+                  <i class="fas fa-money-bill-wave"></i>
+                  Cash on Delivery
+                </label>
+              </div>
+              <div class="payment-option">
+                <input type="radio" id="cardPayment" name="paymentMethod" value="card">
+                <label for="cardPayment">
+                  <i class="fas fa-credit-card"></i>
+                  Credit/Debit Card
+                </label>
+              </div>
+            </div>
+            
+            <div id="cardDetails" class="card-details">
+              <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="expDate">Expiry Date</label>
+                  <input type="text" id="expDate" placeholder="MM/YY">
+                </div>
+                <div class="form-group">
+                  <label for="cvv">CVV</label>
+                  <input type="text" id="cvv" placeholder="123">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="order-summary">
+            <h4>Order Summary</h4>
+            <div class="summary-item">
+              <span>Subtotal</span>
+              <span id="subtotal">$0.00</span>
+            </div>
+            <div class="summary-item">
+              <span>Delivery Fee</span>
+              <span id="deliveryFee">$2.99</span>
+            </div>
+            <div class="summary-item total">
+              <span>Total</span>
+              <span id="orderTotal">$0.00</span>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn btn-primary btn-block">Place Order</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Order Confirmation Modal -->
+  <div class="modal" id="confirmationModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Order Confirmed!</h3>
+        <button class="close-modal"><i class="fas fa-times"></i></button>
+      </div>
+      
+      <div class="modal-body confirmation-body">
+        <div class="confirmation-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h4>Thank you for your order</h4>
+        <p>Your order has been placed successfully.</p>
+        <p>Order ID: <span id="orderId"></span></p>
+        <p>You will receive a confirmation email shortly.</p>
+        
+        <button id="trackOrderBtn" class="btn btn-secondary">Track Order</button>
+        <button id="continueShoppingBtn" class="btn btn-outline">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-button" id="chatButton">
+    <i class="fas fa-comments"></i>
+  </div>
+  
+  <div class="chat-popup" id="chatPopup">
+    <div class="chat-header">
+      <h3>Customer Support</h3>
+      <button id="closeChat"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="message system-message">
+        <p>Welcome to FoodFlex support! How can we help you today?</p>
+        <span class="message-time">Just now</span>
+      </div>
+    </div>
+    <form id="chatForm" class="chat-input">
+      <input type="text" id="messageInput" placeholder="Type your message...">
+      <button type="submit"><i class="fas fa-paper-plane"></i></button>
+    </form>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <i class="fas fa-utensils"></i>
+          <h2>FoodFlex</h2>
+          <p>Delicious food delivered to your doorstep</p>
+        </div>
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="order.html">Menu</a></li>
+            <li><a href="user.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h3>Contact Us</h3>
+          <p><i class="fas fa-map-marker-alt"></i> 123 Food Street, Tasty City</p>
+          <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+          <p><i class="fas fa-envelope"></i> info@foodflex.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 FoodFlex. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Firebase Scripts -->
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/menu.js"></script>
+  <script type="module" src="js/order.js"></script>
+  <script type="module" src="js/pesan.js"></script>
+</body>
+</html>

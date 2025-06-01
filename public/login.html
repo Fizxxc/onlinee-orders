@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - Online Order System</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="admin-body">
+  <div class="admin-login-container">
+    <div class="admin-login-card animate-fade-in">
+      <div class="admin-login-logo">
+        <i class="fas fa-utensils"></i>
+        <h1>FoodFlex</h1>
+      </div>
+      <h2>Admin Login</h2>
+      <p>Access the dashboard to manage orders and products</p>
+      
+      <form id="adminLoginForm" class="admin-login-form">
+        <div class="form-group">
+          <label for="adminEmail">Email</label>
+          <div class="input-with-icon">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="adminEmail" required placeholder="Admin email">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="adminPassword">Password</label>
+          <div class="input-with-icon">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="adminPassword" required placeholder="Admin password">
+            <i class="far fa-eye toggle-password"></i>
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <div class="remember-me">
+            <input type="checkbox" id="adminRemember">
+            <label for="adminRemember">Remember me</label>
+          </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+        
+        <div id="adminLoginError" class="error-message"></div>
+      </form>
+      
+      <div class="admin-login-footer">
+        <a href="index.html">Back to Website</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase Scripts -->
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/login.js"></script>
+</body>
+</html>

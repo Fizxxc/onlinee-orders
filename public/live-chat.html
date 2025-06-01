@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Chat - Online Order System</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="admin-body">
+  <div class="admin-container">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <div class="admin-logo">
+          <i class="fas fa-utensils"></i>
+          <h2>FoodFlex</h2>
+        </div>
+        <button id="sidebarToggle" class="sidebar-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      
+      <div class="admin-profile">
+        <div class="admin-avatar">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="admin-info">
+          <h3 id="adminName">Admin User</h3>
+          <p id="adminEmail">admin@example.com</p>
+        </div>
+      </div>
+      
+      <nav class="admin-nav">
+        <ul>
+          <li>
+            <a href="admin-dashboard.html" data-section="dashboard">
+              <i class="fas fa-tachometer-alt"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-dashboard.html" data-section="orders">
+              <i class="fas fa-shopping-bag"></i>
+              <span>Orders</span>
+              <span class="badge" id="orderCount">0</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-dashboard.html" data-section="menu">
+              <i class="fas fa-utensils"></i>
+              <span>Menu Items</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-dashboard.html" data-section="customers">
+              <i class="fas fa-users"></i>
+              <span>Customers</span>
+            </a>
+          </li>
+          <li>
+            <a href="live-chat.html" class="active">
+              <i class="fas fa-comments"></i>
+              <span>Live Chat</span>
+              <span class="badge" id="chatCount">0</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-dashboard.html" data-section="settings">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="admin-sidebar-footer">
+        <button id="logoutBtn" class="logout-btn">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+    
+    <main class="admin-main">
+      <header class="admin-header">
+        <div class="header-search">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search conversations...">
+        </div>
+        
+        <div class="header-actions">
+          <div class="notification-bell">
+            <i class="fas fa-bell"></i>
+            <span class="notification-count">3</span>
+          </div>
+          <div class="header-divider"></div>
+          <div class="admin-dropdown">
+            <button class="dropdown-toggle">
+              <i class="fas fa-user-circle"></i>
+              <span id="headerAdminName">Admin</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+      
+      <div class="chat-container">
+        <div class="chat-sidebar">
+          <div class="chat-sidebar-header">
+            <h3>Conversations</h3>
+            <div class="chat-filters">
+              <button class="chat-filter active" data-filter="all">All</button>
+              <button class="chat-filter" data-filter="active">Active</button>
+              <button class="chat-filter" data-filter="unread">Unread</button>
+            </div>
+          </div>
+          
+          <div class="conversation-list" id="conversationList">
+            <!-- Will be populated by JavaScript -->
+            <div class="no-conversations">
+              <i class="fas fa-comments"></i>
+              <p>No active conversations</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="chat-main">
+          <div class="chat-header" id="chatHeader">
+            <div class="chat-user-info">
+              <div class="chat-user-avatar">
+                <i class="fas fa-user-circle"></i>
+              </div>
+              <div>
+                <h3 id="chatUserName">Select a conversation</h3>
+                <p id="chatUserStatus">No active chat selected</p>
+              </div>
+            </div>
+            
+            <div class="chat-actions">
+              <button class="chat-action" id="refreshChat">
+                <i class="fas fa-sync-alt"></i>
+              </button>
+              <button class="chat-action" id="endChat">
+                <i class="fas fa-times"></i>
+                <span>End Chat</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="chat-messages" id="adminChatMessages">
+            <div class="no-chat-selected">
+              <i class="fas fa-comments"></i>
+              <p>Select a conversation to start chatting</p>
+            </div>
+          </div>
+          
+          <div class="chat-input-container">
+            <form id="adminChatForm" class="admin-chat-form">
+              <div class="chat-input-wrapper">
+                <input type="text" id="adminMessageInput" placeholder="Type your message here..." disabled>
+                <div class="chat-input-actions">
+                  <button type="button" class="chat-input-action">
+                    <i class="fas fa-paperclip"></i>
+                  </button>
+                  <button type="button" class="chat-input-action">
+                    <i class="far fa-smile"></i>
+                  </button>
+                </div>
+              </div>
+              <button type="submit" class="chat-send-btn" disabled>
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        
+        <div class="chat-info">
+          <div class="chat-info-header">
+            <h3>Customer Information</h3>
+            <button id="toggleInfo" class="toggle-info">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          
+          <div class="customer-info" id="customerInfo">
+            <div class="no-customer-selected">
+              <p>Select a conversation to view customer details</p>
+            </div>
+            
+            <div class="customer-details hidden" id="customerDetails">
+              <div class="info-section">
+                <h4>Customer Details</h4>
+                <p><strong>Name:</strong> <span id="infoCustomerName"></span></p>
+                <p><strong>Email:</strong> <span id="infoCustomerEmail"></span></p>
+                <p><strong>Phone:</strong> <span id="infoCustomerPhone"></span></p>
+                <p><strong>Member Since:</strong> <span id="infoCustomerSince"></span></p>
+              </div>
+              
+              <div class="info-section">
+                <h4>Order History</h4>
+                <div class="order-history" id="customerOrderHistory">
+                  <!-- Will be populated by JavaScript -->
+                </div>
+              </div>
+              
+              <div class="info-section">
+                <h4>Quick Responses</h4>
+                <div class="quick-responses">
+                  <button class="quick-response" data-response="Thank you for contacting us. How can I help you today?">
+                    Greeting
+                  </button>
+                  <button class="quick-response" data-response="I'm checking that for you now. Please give me a moment.">
+                    Checking
+                  </button>
+                  <button class="quick-response" data-response="Your order has been received and is being prepared. It should be delivered within 30-45 minutes.">
+                    Order Status
+                  </button>
+                  <button class="quick-response" data-response="I apologize for the inconvenience. Let me resolve this issue for you.">
+                    Apology
+                  </button>
+                  <button class="quick-response" data-response="Is there anything else I can help you with today?">
+                    Follow-up
+                  </button>
+                  <button class="quick-response" data-response="Thank you for contacting us. Have a great day!">
+                    Closing
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="overlay" id="adminOverlay"></div>
+
+  <!-- Firebase Scripts -->
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/live-chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Online Order System</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="admin-body">
+  <div class="admin-container">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <div class="admin-logo">
+          <i class="fas fa-utensils"></i>
+          <h2>FoodFlex</h2>
+        </div>
+        <button id="sidebarToggle" class="sidebar-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      
+      <div class="admin-profile">
+        <div class="admin-avatar">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="admin-info">
+          <h3 id="adminName">Admin User</h3>
+          <p id="adminEmail">admin@example.com</p>
+        </div>
+      </div>
+      
+      <nav class="admin-nav">
+        <ul>
+          <li>
+            <a href="#" class="active" data-section="dashboard">
+              <i class="fas fa-tachometer-alt"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" data-section="orders">
+              <i class="fas fa-shopping-bag"></i>
+              <span>Orders</span>
+              <span class="badge" id="orderCount">0</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" data-section="menu">
+              <i class="fas fa-utensils"></i>
+              <span>Menu Items</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" data-section="customers">
+              <i class="fas fa-users"></i>
+              <span>Customers</span>
+            </a>
+          </li>
+          <li>
+            <a href="live-chat.html">
+              <i class="fas fa-comments"></i>
+              <span>Live Chat</span>
+              <span class="badge" id="chatCount">0</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" data-section="settings">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="admin-sidebar-footer">
+        <button id="logoutBtn" class="logout-btn">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+    
+    <main class="admin-main">
+      <header class="admin-header">
+        <div class="header-search">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search...">
+        </div>
+        
+        <div class="header-actions">
+          <div class="notification-bell">
+            <i class="fas fa-bell"></i>
+            <span class="notification-count">3</span>
+          </div>
+          <div class="header-divider"></div>
+          <div class="admin-dropdown">
+            <button class="dropdown-toggle">
+              <i class="fas fa-user-circle"></i>
+              <span id="headerAdminName">Admin</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+      
+      <div class="admin-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="content-section active">
+          <div class="section-header">
+            <h2>Dashboard</h2>
+            <p>Overview of your business</p>
+          </div>
+          
+          <div class="stats-cards">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Total Orders</h3>
+                <p id="totalOrdersCount">0</p>
+                <span class="stat-change positive">+12.5% <i class="fas fa-arrow-up"></i></span>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-dollar-sign"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Revenue</h3>
+                <p id="totalRevenue">$0.00</p>
+                <span class="stat-change positive">+8.2% <i class="fas fa-arrow-up"></i></span>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Customers</h3>
+                <p id="totalCustomers">0</p>
+                <span class="stat-change positive">+5.3% <i class="fas fa-arrow-up"></i></span>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-utensils"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Menu Items</h3>
+                <p id="totalMenuItems">0</p>
+                <span class="stat-change neutral">0% <i class="fas fa-minus"></i></span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="dashboard-grid">
+            <div class="chart-container">
+              <div class="chart-header">
+                <h3>Sales Overview</h3>
+                <div class="chart-filters">
+                  <button class="active">Day</button>
+                  <button>Week</button>
+                  <button>Month</button>
+                  <button>Year</button>
+                </div>
+              </div>
+              <div class="chart-placeholder">
+                <img src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sales Chart">
+              </div>
+            </div>
+            
+            <div class="recent-orders">
+              <div class="table-header">
+                <h3>Recent Orders</h3>
+                <a href="#" class="view-all" data-section="orders">View All</a>
+              </div>
+              
+              <div class="table-container">
+                <table id="recentOrdersTable">
+                  <thead>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Customer</th>
+                      <th>Status</th>
+                      <th>Total</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Will be populated by JavaScript -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+            <div class="top-products">
+              <div class="card-header">
+                <h3>Top Selling Items</h3>
+              </div>
+              <ul id="topProductsList" class="product-list">
+                <!-- Will be populated by JavaScript -->
+              </ul>
+            </div>
+            
+            <div class="recent-activities">
+              <div class="card-header">
+                <h3>Recent Activities</h3>
+              </div>
+              <ul id="recentActivitiesList" class="activity-list">
+                <!-- Will be populated by JavaScript -->
+              </ul>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Orders Section -->
+        <section id="orders" class="content-section">
+          <div class="section-header">
+            <h2>Orders</h2>
+            <p>Manage customer orders</p>
+          </div>
+          
+          <div class="filter-row">
+            <div class="search-container">
+              <i class="fas fa-search"></i>
+              <input type="text" id="orderSearch" placeholder="Search orders...">
+            </div>
+            
+            <div class="filter-group">
+              <label for="statusFilter">Status:</label>
+              <select id="statusFilter">
+                <option value="all">All</option>
+                <option value="pending">Pending</option>
+                <option value="preparing">Preparing</option>
+                <option value="delivering">Delivering</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <label for="dateFilter">Date:</label>
+              <select id="dateFilter">
+                <option value="all">All Time</option>
+                <option value="today">Today</option>
+                <option value="yesterday">Yesterday</option>
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="table-container">
+            <table id="ordersTable">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Items</th>
+                  <th>Total</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Will be populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+        
+        <!-- Menu Items Section -->
+        <section id="menu" class="content-section">
+          <div class="section-header">
+            <h2>Menu Items</h2>
+            <p>Manage your food menu</p>
+            <button id="addMenuItem" class="btn btn-primary">
+              <i class="fas fa-plus"></i> Add New Item
+            </button>
+          </div>
+          
+          <div class="filter-row">
+            <div class="search-container">
+              <i class="fas fa-search"></i>
+              <input type="text" id="menuSearch" placeholder="Search menu items...">
+            </div>
+            
+            <div class="filter-group">
+              <label for="categoryFilter">Category:</label>
+              <select id="categoryFilter">
+                <option value="all">All</option>
+                <option value="main">Main Dishes</option>
+                <option value="sides">Sides</option>
+                <option value="desserts">Desserts</option>
+                <option value="drinks">Drinks</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <label for="availabilityFilter">Availability:</label>
+              <select id="availabilityFilter">
+                <option value="all">All</option>
+                <option value="available">Available</option>
+                <option value="unavailable">Unavailable</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="menu-items-grid" id="menuItemsGrid">
+            <!-- Will be populated by JavaScript -->
+          </div>
+        </section>
+        
+        <!-- Customers Section -->
+        <section id="customers" class="content-section">
+          <div class="section-header">
+            <h2>Customers</h2>
+            <p>Manage customer information</p>
+          </div>
+          
+          <div class="filter-row">
+            <div class="search-container">
+              <i class="fas fa-search"></i>
+              <input type="text" id="customerSearch" placeholder="Search customers...">
+            </div>
+          </div>
+          
+          <div class="table-container">
+            <table id="customersTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Orders</th>
+                  <th>Total Spent</th>
+                  <th>Joined Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Will be populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+        
+        <!-- Settings Section -->
+        <section id="settings" class="content-section">
+          <div class="section-header">
+            <h2>Settings</h2>
+            <p>Manage your account and system settings</p>
+          </div>
+          
+          <div class="settings-grid">
+            <div class="settings-card">
+              <h3>Profile Settings</h3>
+              
+              <form id="profileForm" class="settings-form">
+                <div class="form-group">
+                  <label for="profileName">Name</label>
+                  <input type="text" id="profileName" placeholder="Your Name">
+                </div>
+                
+                <div class="form-group">
+                  <label for="profileEmail">Email</label>
+                  <input type="email" id="profileEmail" placeholder="Your Email" disabled>
+                </div>
+                
+                <div class="form-group">
+                  <label for="profilePhone">Phone</label>
+                  <input type="tel" id="profilePhone" placeholder="Your Phone Number">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+              </form>
+            </div>
+            
+            <div class="settings-card">
+              <h3>Change Password</h3>
+              
+              <form id="passwordForm" class="settings-form">
+                <div class="form-group">
+                  <label for="currentPassword">Current Password</label>
+                  <input type="password" id="currentPassword" placeholder="Enter current password">
+                </div>
+                
+                <div class="form-group">
+                  <label for="newPassword">New Password</label>
+                  <input type="password" id="newPassword" placeholder="Enter new password">
+                </div>
+                
+                <div class="form-group">
+                  <label for="confirmNewPassword">Confirm New Password</label>
+                  <input type="password" id="confirmNewPassword" placeholder="Confirm new password">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Update Password</button>
+              </form>
+            </div>
+            
+            <div class="settings-card">
+              <h3>Store Settings</h3>
+              
+              <form id="storeForm" class="settings-form">
+                <div class="form-group">
+                  <label for="storeName">Store Name</label>
+                  <input type="text" id="storeName" placeholder="Your Store Name" value="FoodFlex">
+                </div>
+                
+                <div class="form-group">
+                  <label for="storeAddress">Address</label>
+                  <textarea id="storeAddress" placeholder="Store Address">123 Food Street, Tasty City</textarea>
+                </div>
+                
+                <div class="form-group">
+                  <label for="storePhone">Contact Number</label>
+                  <input type="tel" id="storePhone" placeholder="Store Phone Number" value="(123) 456-7890">
+                </div>
+                
+                <div class="form-group">
+                  <label for="storeEmail">Contact Email</label>
+                  <input type="email" id="storeEmail" placeholder="Store Email" value="info@foodflex.com">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+              </form>
+            </div>
+            
+            <div class="settings-card">
+              <h3>Notification Settings</h3>
+              
+              <form id="notificationForm" class="settings-form">
+                <div class="switch-group">
+                  <label for="orderNotifications">Order Notifications</label>
+                  <label class="switch">
+                    <input type="checkbox" id="orderNotifications" checked>
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                
+                <div class="switch-group">
+                  <label for="chatNotifications">Chat Notifications</label>
+                  <label class="switch">
+                    <input type="checkbox" id="chatNotifications" checked>
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                
+                <div class="switch-group">
+                  <label for="emailNotifications">Email Notifications</label>
+                  <label class="switch">
+                    <input type="checkbox" id="emailNotifications" checked>
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                
+                <div class="switch-group">
+                  <label for="stockAlerts">Low Stock Alerts</label>
+                  <label class="switch">
+                    <input type="checkbox" id="stockAlerts" checked>
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  
+  <!-- Add/Edit Menu Item Modal -->
+  <div class="modal" id="menuItemModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="menuModalTitle">Add New Menu Item</h3>
+        <button class="close-modal"><i class="fas fa-times"></i></button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="menuItemForm" class="menu-item-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="itemName">Item Name</label>
+              <input type="text" id="itemName" required placeholder="Enter item name">
+            </div>
+            
+            <div class="form-group">
+              <label for="itemPrice">Price ($)</label>
+              <input type="number" id="itemPrice" required placeholder="Enter price" step="0.01" min="0">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="itemDescription">Description</label>
+            <textarea id="itemDescription" required placeholder="Enter item description"></textarea>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="itemCategory">Category</label>
+              <select id="itemCategory" required>
+                <option value="">Select a category</option>
+                <option value="main">Main Dishes</option>
+                <option value="sides">Sides</option>
+                <option value="desserts">Desserts</option>
+                <option value="drinks">Drinks</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="itemAvailability">Availability</label>
+              <select id="itemAvailability" required>
+                <option value="available">Available</option>
+                <option value="unavailable">Unavailable</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="itemImage">Image URL</label>
+            <input type="text" id="itemImage" placeholder="Enter image URL">
+          </div>
+          
+          <div class="form-preview">
+            <div id="imagePreview" class="image-preview">
+              <i class="fas fa-image"></i>
+              <p>Image Preview</p>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <div class="featured-check">
+              <input type="checkbox" id="itemFeatured">
+              <label for="itemFeatured">Featured Item</label>
+            </div>
+          </div>
+          
+          <input type="hidden" id="itemId">
+          
+          <div class="modal-actions">
+            <button type="button" class="btn btn-outline" id="cancelMenuItem">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Item</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- View Order Modal -->
+  <div class="modal" id="viewOrderModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Order Details</h3>
+        <button class="close-modal"><i class="fas fa-times"></i></button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="order-info">
+          <div class="order-header">
+            <div>
+              <h4>Order #<span id="modalOrderId"></span></h4>
+              <p id="modalOrderDate"></p>
+            </div>
+            <div class="order-status">
+              <span id="modalOrderStatus"></span>
+            </div>
+          </div>
+          
+          <div class="order-details-grid">
+            <div class="order-customer">
+              <h4>Customer Information</h4>
+              <p><strong>Name:</strong> <span id="modalCustomerName"></span></p>
+              <p><strong>Email:</strong> <span id="modalCustomerEmail"></span></p>
+              <p><strong>Phone:</strong> <span id="modalCustomerPhone"></span></p>
+            </div>
+            
+            <div class="order-delivery">
+              <h4>Delivery Information</h4>
+              <p><strong>Address:</strong> <span id="modalDeliveryAddress"></span></p>
+              <p><strong>City:</strong> <span id="modalDeliveryCity"></span></p>
+              <p><strong>Zip Code:</strong> <span id="modalDeliveryZip"></span></p>
+            </div>
+            
+            <div class="order-payment">
+              <h4>Payment Information</h4>
+              <p><strong>Method:</strong> <span id="modalPaymentMethod"></span></p>
+              <p><strong>Status:</strong> <span id="modalPaymentStatus"></span></p>
+            </div>
+          </div>
+          
+          <div class="order-items">
+            <h4>Order Items</h4>
+            <div class="order-items-list" id="modalOrderItems">
+              <!-- Will be populated by JavaScript -->
+            </div>
+          </div>
+          
+          <div class="order-summary">
+            <div class="summary-item">
+              <span>Subtotal</span>
+              <span id="modalSubtotal"></span>
+            </div>
+            <div class="summary-item">
+              <span>Delivery Fee</span>
+              <span id="modalDeliveryFee"></span>
+            </div>
+            <div class="summary-item total">
+              <span>Total</span>
+              <span id="modalTotal"></span>
+            </div>
+          </div>
+          
+          <div class="order-actions">
+            <select id="updateStatusSelect">
+              <option value="pending">Pending</option>
+              <option value="preparing">Preparing</option>
+              <option value="delivering">Delivering</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+            <button id="updateStatusBtn" class="btn btn-primary">Update Status</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="adminOverlay"></div>
+
+  <!-- Firebase Scripts -->
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>
